@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.poi.testpoi.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.poi.testpoi.pojo.User">
+        <id column="uid" property="uid" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="MON_MOON" property="mon_moon" jdbcType="INTEGER"/>
+        <result column="MON_NIGHT" property="mon_night" jdbcType="INTEGER"/>
+        <result column="TUE_MOON" property="tue_moon" jdbcType="INTEGER"/>
+        <result column="TUE_NIGHT" property="tue_night" jdbcType="INTEGER"/>
+        <result column="WED_MOON" property="wed_moon" jdbcType="INTEGER"/>
+        <result column="WED_NIGHT" property="wed_night" jdbcType="INTEGER"/>
+        <result column="THU_NIGHT" property="thu_moon" jdbcType="INTEGER"/>
+        <result column="FRI_MOON" property="fri_moon" jdbcType="INTEGER"/>
+        <result column="FRI_NIGHT" property="fri_night" jdbcType="INTEGER"/>
+        <result column="SAT_MOON" property="sat_moon" jdbcType="INTEGER"/>
+        <result column="SAT_NIGHT" property="sat_night" jdbcType="INTEGER"/>
+        <result column="SUN_MOON" property="sun_moon" jdbcType="INTEGER"/>
+        <result column="SUN_NIGHT" property="sun_night" jdbcType="INTEGER"/>
+        <result column="BOOK" property="book" jdbcType="INTEGER"/>
+        <result column="REMARKS" property="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="column_List">
+        uid,username,MON_MOON,MON_NIGHT,TUE_MOON,TUE_NIGHT,WED_MOON,WED_NIGHT,THU_NIGHT,FRI_MOON,FRI_NIGHT,SAT_MOON,SAT_NIGHT,SUN_MOON,SUN_NIGHT,BOOK,REMARKS
+    </sql>
+
+    <select id="selectUsers" resultMap="BaseResultMap">
+        SELECT
+        <include refid="column_List"/>
+        FROM user2
+    </select>
+<!--    按照日期选择各个日期有时间的人-->
+    <!--    周一-->
+    <select id="selectMon_MoonByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where MON_MOON = #{mon_moon,jdbcType=INTEGER}
+    </select>
+    <select id="selectMon_NightByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where MON_NIGHT = #{mon_night,jdbcType=INTEGER}
+    </select>
+    <!--    周二-->
+    <select id="selectTue_MoonByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where TUE_MOON = #{tue_moon,jdbcType=INTEGER}
+    </select>
+    <select id="selectTue_NightByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where TUE_NIGHT = #{tue_night,jdbcType=INTEGER}
+    </select>
+    <!--    周三-->
+    <select id="selectWen_MoonByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where WED_MOON = #{wed_moon,jdbcType=INTEGER}
+    </select>
+    <select id="selectWen_NightByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where WED_NIGHT = #{wed_night,jdbcType=INTEGER}
+    </select>
+    <!--    周四-->
+    <select id="selectThu_NightByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where THU_NIGHT = #{thu_moon,jdbcType=INTEGER}
+    </select>
+    <!--    周五-->
+    <select id="selectFri_MoonByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where FRI_MOON = #{fri_moon,jdbcType=INTEGER}
+    </select>
+    <select id="selectFri_NightByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where FRI_NIGHT = #{fri_night,jdbcType=INTEGER}
+    </select>
+    <!--    周六-->
+    <select id="selectSat_MoonByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where SAT_MOON = #{sat_moon,jdbcType=INTEGER}
+    </select>
+    <select id="selectSat_NightByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where SAT_NIGHT = #{sat_night,jdbcType=INTEGER}
+    </select>
+    <!--    周日-->
+    <select id="selectSun_MoonByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where SUN_MOON = #{sun_moon,jdbcType=INTEGER}
+    </select>
+    <select id="selectSun_NightByDays" resultMap="BaseResultMap">
+        SELECT username FROM user2
+        where SUN_NIGHT = #{sun_night,jdbcType=INTEGER}
+    </select>
+
+    <update id="updateUserByName" parameterType="com.poi.testpoi.pojo.User">
+      update user2 set
+        MON_MOON=#{mon_moon},
+        MON_NIGHT=#{mon_night},
+        TUE_MOON=#{tue_moon},
+        TUE_NIGHT=#{tue_night},
+        WED_MOON=#{wed_moon},
+        WED_NIGHT=#{wed_night},
+        THU_NIGHT=#{thu_moon},
+        FRI_MOON=#{fri_moon},
+        FRI_NIGHT=#{fri_night},
+        SAT_MOON=#{sat_moon},
+        SAT_NIGHT=#{sat_night},
+        SUN_MOON=#{sun_moon},
+        SUN_NIGHT=#{sun_night},
+        BOOK=#{book},
+        REMARKS=#{remarks}
+      where username = #{username}
+    </update>
+
+    <insert id="addUser" parameterType="com.poi.testpoi.pojo.User">
+        INSERT INTO USER2 (
+            username,
+            MON_MOON,
+            MON_NIGHT,
+            TUE_MOON,
+            TUE_NIGHT,
+            WED_MOON,
+            WED_NIGHT,
+            THU_NIGHT,
+            FRI_MOON,
+            FRI_NIGHT,
+            SAT_MOON,
+            SAT_NIGHT,
+            SUN_MOON,
+            SUN_NIGHT,
+            BOOK,
+            REMARKS
+            ) VALUES (
+            #{username},
+            #{mon_moon},
+            #{mon_night},
+            #{tue_moon},
+            #{tue_night},
+            #{wed_moon},
+            #{wed_night},
+            #{thu_moon},
+            #{fri_moon},
+            #{fri_night},
+            #{sat_moon},
+            #{sat_night},
+            #{sun_moon},
+            #{sun_night},
+            #{book},
+            #{remarks}
+            )
+    </insert>
+
+    <select id="selectByName" resultType="Integer">
+        SELECT count(*) FROM user2 WHERE username=#{username}
+    </select>
+
+    <delete id="deleteAllDate" parameterType="com.poi.testpoi.pojo.User">
+        DELETE from user2
+    </delete>
+
+    <select id="selectByBook" parameterType="java.lang.Integer" resultType="com.poi.testpoi.pojo.User">
+        SELECT username FROM user2
+        where BOOK = #{book,jdbcType=INTEGER}
+    </select>
+
+</mapper>
